@@ -3,284 +3,313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MentalAfrica — AI Wellness Support for African Youth</title>
+<title>MentalAfrica — AI Wellness for African Youth</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
-:root{--green:#1a7a4a;--light-green:#27AE60;--gold:#F5A623;--navy:#1B2A6B;--white:#FFFFFF;--light:#F0FAF4;--gray:#6B7280;--red:#E63329;}
+:root{--green:#1a7a4a;--light-green:#27AE60;--gold:#F5A623;--navy:#1B2A6B;--light:#F0FAF4;--gray:#6B7280;--red:#E63329;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:var(--light);min-height:100vh;}
-.header{background:linear-gradient(135deg,var(--green),#0d4a2a);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 20px rgba(0,0,0,0.15);}
+#landing-page{min-height:100vh;background:linear-gradient(135deg,#0d4a2a,#1a7a4a,#27AE60);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;}
+.landing-logo{width:90px;height:90px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 1.5rem;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+.landing-title{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:white;margin-bottom:0.5rem;}
+.landing-sub{font-size:1rem;color:rgba(255,255,255,0.75);margin-bottom:2.5rem;max-width:500px;line-height:1.7;}
+.landing-form{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:24px;padding:2rem;max-width:440px;width:100%;margin-bottom:2rem;}
+.landing-form h3{color:white;font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;}
+.landing-input,.landing-select{width:100%;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);color:white;padding:0.85rem 1rem;border-radius:12px;font-family:'Poppins',sans-serif;font-size:0.95rem;outline:none;margin-bottom:0.75rem;cursor:pointer;}
+.landing-input::placeholder{color:rgba(255,255,255,0.6);}
+.landing-select option{background:#1a7a4a;color:white;}
+.btn-start{background:var(--gold);color:#0d4a2a;border:none;padding:1rem 2rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;width:100%;transition:all 0.2s;}
+.btn-start:hover{transform:translateY(-2px);}
+.landing-features{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;}
+.landing-feature{color:rgba(255,255,255,0.8);font-size:0.82rem;}
+#main-app{display:none;}
+.header{background:linear-gradient(135deg,var(--green),#0d4a2a);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
 .logo{display:flex;align-items:center;gap:0.75rem;}
-.logo-icon{width:44px;height:44px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
-.logo-text h1{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:white;}
-.logo-text p{font-size:0.72rem;color:rgba(255,255,255,0.7);}
-.header-badge{background:rgba(255,255,255,0.15);color:white;padding:0.4rem 1rem;border-radius:50px;font-size:0.75rem;font-weight:600;}
-.hero{background:linear-gradient(135deg,var(--green),#0d4a2a);padding:3rem 2rem 4rem;text-align:center;color:white;}
-.hero h2{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;margin-bottom:1rem;line-height:1.2;}
-.hero p{font-size:1rem;color:rgba(255,255,255,0.8);max-width:600px;margin:0 auto 2rem;line-height:1.7;}
-.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;}
-.hero-stat{text-align:center;}
-.hero-stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold);}
-.hero-stat-label{font-size:0.75rem;color:rgba(255,255,255,0.7);}
-.main{max-width:900px;margin:-2rem auto 0;padding:0 1.5rem 3rem;}
-.card{background:white;border-radius:20px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.07);}
-.card-title{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:1.25rem;}
-.mood-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.75rem;margin-bottom:1.5rem;}
-.mood-btn{background:var(--light);border:2px solid transparent;border-radius:14px;padding:1rem 0.5rem;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Poppins',sans-serif;}
-.mood-btn:hover,.mood-btn.selected{border-color:var(--light-green);background:#e8f8ef;}
-.mood-emoji{font-size:2rem;display:block;margin-bottom:0.4rem;}
-.mood-label{font-size:0.78rem;font-weight:600;color:var(--navy);}
-.mood-desc{font-size:0.68rem;color:var(--gray);margin-top:0.2rem;}
-.form-group{margin-bottom:1.25rem;}
-.form-group label{display:block;font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:0.4rem;}
-.form-group select,.form-group textarea,.form-group input{width:100%;background:var(--light);border:1.5px solid rgba(27,42,107,0.12);color:var(--navy);padding:0.75rem 1rem;border-radius:12px;font-family:'Poppins',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
-.form-group select:focus,.form-group textarea:focus{border-color:var(--light-green);}
-.form-group textarea{resize:vertical;min-height:100px;}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.btn-primary{background:linear-gradient(135deg,var(--green),var(--light-green));color:white;border:none;padding:0.9rem 2rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;width:100%;transition:all 0.2s;box-shadow:0 4px 15px rgba(27,122,74,0.3);}
-.btn-primary:hover{transform:translateY(-2px);}
-.btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
-.chat-box{background:var(--light);border-radius:16px;padding:1.25rem;max-height:450px;overflow-y:auto;margin-bottom:1rem;display:flex;flex-direction:column;gap:1rem;}
+.logo-icon{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.logo-text h1{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:white;}
+.logo-text p{font-size:0.68rem;color:rgba(255,255,255,0.7);}
+.header-right{display:flex;align-items:center;gap:0.75rem;}
+.user-greeting{color:white;font-size:0.8rem;font-weight:600;}
+.btn-share{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);padding:0.4rem 0.9rem;border-radius:50px;font-size:0.75rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;}
+.lang-select{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);padding:0.35rem 0.6rem;border-radius:8px;font-family:'Poppins',sans-serif;font-size:0.75rem;cursor:pointer;outline:none;}
+.lang-select option{background:#1a7a4a;}
+.streak-bar{background:linear-gradient(135deg,#0d4a2a,#1a7a4a);padding:0.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.streak-info{color:rgba(255,255,255,0.9);font-size:0.78rem;}
+.streak-num{font-weight:800;color:var(--gold);}
+.main{max-width:900px;margin:0 auto;padding:1.5rem;}
+.card{background:white;border-radius:20px;padding:1.75rem;margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+.card-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:1.25rem;}
+.disclaimer{background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.3);border-radius:12px;padding:0.85rem 1rem;margin-bottom:1.25rem;font-size:0.78rem;color:var(--gray);line-height:1.6;}
+.tabs{display:flex;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:wrap;}
+.tab-btn{background:white;border:2px solid rgba(27,122,74,0.2);color:var(--gray);padding:0.45rem 1rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.tab-btn.active,.tab-btn:hover{background:var(--green);color:white;border-color:var(--green);}
+.chat-box{background:var(--light);border-radius:16px;padding:1.25rem;max-height:420px;overflow-y:auto;margin-bottom:1rem;display:flex;flex-direction:column;gap:1rem;}
 .chat-msg{display:flex;gap:0.75rem;align-items:flex-start;}
 .chat-msg.user{flex-direction:row-reverse;}
-.chat-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.chat-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
 .chat-msg.ai .chat-avatar{background:linear-gradient(135deg,var(--green),var(--light-green));}
 .chat-msg.user .chat-avatar{background:var(--navy);}
-.chat-bubble{max-width:80%;padding:0.85rem 1.1rem;border-radius:16px;font-size:0.88rem;line-height:1.7;}
+.chat-bubble{max-width:80%;padding:0.8rem 1rem;border-radius:16px;font-size:0.85rem;line-height:1.7;}
 .chat-msg.ai .chat-bubble{background:white;color:var(--navy);box-shadow:0 2px 8px rgba(0,0,0,0.06);}
 .chat-msg.user .chat-bubble{background:var(--navy);color:white;}
 .chat-input-row{display:flex;gap:0.75rem;}
-.chat-input{flex:1;background:var(--light);border:1.5px solid rgba(27,42,107,0.12);color:var(--navy);padding:0.75rem 1rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.88rem;outline:none;}
-.chat-input:focus{border-color:var(--light-green);}
-.btn-send{background:var(--green);color:white;border:none;padding:0.75rem 1.25rem;border-radius:50px;cursor:pointer;font-size:1rem;}
-.quick-prompts{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;}
-.quick-btn{background:white;border:1.5px solid rgba(27,122,74,0.2);color:var(--green);padding:0.4rem 0.9rem;border-radius:50px;font-size:0.75rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
-.quick-btn:hover{background:var(--light);}
-.crisis-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.75rem;}
-.crisis-card{background:white;border-radius:12px;padding:1rem;border-top:3px solid var(--red);box-shadow:0 2px 8px rgba(0,0,0,0.05);}
-.crisis-country{font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:0.25rem;}
-.crisis-number{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--red);}
-.crisis-org{font-size:0.72rem;color:var(--gray);margin-top:0.2rem;}
-.crisis-call{display:inline-block;margin-top:0.5rem;background:var(--red);color:white;padding:0.3rem 0.75rem;border-radius:50px;font-size:0.72rem;font-weight:700;text-decoration:none;}
-.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:1.5rem;}
+.chat-input{flex:1;background:var(--light);border:1.5px solid rgba(27,42,107,0.12);color:var(--navy);padding:0.7rem 1rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.85rem;outline:none;}
+.btn-send{background:var(--green);color:white;border:none;padding:0.7rem 1.1rem;border-radius:50px;cursor:pointer;font-size:0.95rem;}
+.quick-prompts{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.75rem;}
+.quick-btn{background:white;border:1.5px solid rgba(27,122,74,0.2);color:var(--green);padding:0.35rem 0.8rem;border-radius:50px;font-size:0.72rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;}
+.mood-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:0.65rem;margin-bottom:1.25rem;}
+.mood-btn{background:var(--light);border:2px solid transparent;border-radius:12px;padding:0.85rem 0.4rem;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Poppins',sans-serif;}
+.mood-btn:hover,.mood-btn.selected{border-color:var(--light-green);background:#e8f8ef;}
+.mood-emoji{font-size:1.8rem;display:block;margin-bottom:0.3rem;}
+.mood-label{font-size:0.75rem;font-weight:600;color:var(--navy);}
+.breathing-container{text-align:center;padding:2rem 1rem;}
+.breath-circle{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--light-green));margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:white;transition:transform 4s ease-in-out;}
+.breath-text{font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
+.breath-sub{font-size:0.85rem;color:var(--gray);}
+.btn-breath{background:linear-gradient(135deg,var(--green),var(--light-green));color:white;border:none;padding:0.85rem 2rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:1rem;}
+.journal-entry{background:var(--light);border-radius:12px;padding:1rem;margin-bottom:0.75rem;border-left:3px solid var(--light-green);}
+.journal-date{font-size:0.72rem;color:var(--gray);margin-bottom:0.4rem;}
+.journal-text{font-size:0.85rem;color:var(--navy);line-height:1.6;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:0.35rem;}
+.form-group select,.form-group textarea,.form-group input{width:100%;background:var(--light);border:1.5px solid rgba(27,42,107,0.12);color:var(--navy);padding:0.7rem 0.9rem;border-radius:10px;font-family:'Poppins',sans-serif;font-size:0.85rem;outline:none;}
+.form-group textarea{resize:vertical;min-height:90px;}
+.btn-primary{background:linear-gradient(135deg,var(--green),var(--light-green));color:white;border:none;padding:0.85rem 1.5rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;width:100%;transition:all 0.2s;}
+.btn-primary:disabled{opacity:0.6;cursor:not-allowed;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;}
 .feature-card{background:white;border-radius:14px;padding:1.25rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.05);border-top:3px solid var(--light-green);}
-.feature-icon{font-size:2rem;margin-bottom:0.5rem;}
-.feature-title{font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:0.25rem;}
-.feature-desc{font-size:0.75rem;color:var(--gray);line-height:1.5;}
-.disclaimer{background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.3);border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-size:0.8rem;color:var(--gray);line-height:1.6;}
+.feature-icon{font-size:1.8rem;margin-bottom:0.5rem;}
+.feature-title{font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem;}
+.feature-desc{font-size:0.72rem;color:var(--gray);line-height:1.5;margin-bottom:0.75rem;}
+.crisis-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0.75rem;}
+.crisis-card{background:white;border-radius:12px;padding:1rem;border-top:3px solid var(--red);box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.crisis-country{font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem;}
+.crisis-number{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--red);}
+.crisis-org{font-size:0.7rem;color:var(--gray);margin-top:0.15rem;}
+.crisis-call{display:inline-block;margin-top:0.5rem;background:var(--red);color:white;padding:0.3rem 0.75rem;border-radius:50px;font-size:0.7rem;font-weight:700;text-decoration:none;}
+.story-card{background:white;border-radius:16px;padding:1.5rem;margin-bottom:1rem;box-shadow:0 2px 12px rgba(0,0,0,0.05);border-left:4px solid var(--gold);}
+.story-meta{font-size:0.72rem;color:var(--gray);margin-bottom:0.75rem;}
+.story-text{font-size:0.88rem;color:var(--navy);line-height:1.8;font-style:italic;}
+.story-tag{display:inline-block;background:rgba(245,166,35,0.1);color:#b37800;padding:0.2rem 0.6rem;border-radius:50px;font-size:0.68rem;font-weight:700;margin-top:0.5rem;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.spinner{width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;margin-right:0.5rem;vertical-align:middle;}
-.tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
-.tab-btn{background:white;border:2px solid rgba(27,122,74,0.2);color:var(--gray);padding:0.5rem 1.25rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
-.tab-btn.active,.tab-btn:hover{background:var(--green);color:white;border-color:var(--green);}
-footer{background:#0d4a2a;color:rgba(255,255,255,0.6);text-align:center;padding:1.5rem;font-size:0.8rem;margin-top:2rem;}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;margin-right:0.5rem;vertical-align:middle;}
+footer{background:#0d4a2a;color:rgba(255,255,255,0.6);text-align:center;padding:1.25rem;font-size:0.78rem;margin-top:2rem;}
 footer a{color:var(--gold);text-decoration:none;}
-@media(max-width:600px){.hero h2{font-size:1.8rem;}.form-grid{grid-template-columns:1fr;}.hero-stats{gap:1rem;}}
+@media(max-width:600px){.landing-title{font-size:2rem;}.tabs{gap:0.35rem;}.tab-btn{padding:0.4rem 0.75rem;font-size:0.72rem;}}
 </style>
 </head>
 <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MentalAfrica — AI Wellness for African Youth</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1a7a4a;--light-green:#27AE60;--gold:#F5A623;--navy:#1B2A6B;--light:#F0FAF4;--gray:#6B7280;--red:#E63329;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:var(--light);min-height:100vh;}
+#landing-page{min-height:100vh;background:linear-gradient(135deg,#0d4a2a,#1a7a4a,#27AE60);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;}
+.landing-logo{width:90px;height:90px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 1.5rem;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+.landing-title{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:white;margin-bottom:0.5rem;}
+.landing-sub{font-size:1rem;color:rgba(255,255,255,0.75);margin-bottom:2.5rem;max-width:500px;line-height:1.7;}
+.landing-form{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:24px;padding:2rem;max-width:440px;width:100%;margin-bottom:2rem;}
+.landing-form h3{color:white;font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;}
+.landing-input,.landing-select{width:100%;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);color:white;padding:0.85rem 1rem;border-radius:12px;font-family:'Poppins',sans-serif;font-size:0.95rem;outline:none;margin-bottom:0.75rem;cursor:pointer;}
+.landing-input::placeholder{color:rgba(255,255,255,0.6);}
+.landing-select option{background:#1a7a4a;color:white;}
+.btn-start{background:var(--gold);color:#0d4a2a;border:none;padding:1rem 2rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;width:100%;transition:all 0.2s;}
+.btn-start:hover{transform:translateY(-2px);}
+.landing-features{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;}
+.landing-feature{color:rgba(255,255,255,0.8);font-size:0.82rem;}
+#main-app{display:none;}
+.header{background:linear-gradient(135deg,var(--green),#0d4a2a);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:0.75rem;}
+.logo-icon{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.logo-text h1{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:white;}
+.logo-text p{font-size:0.68rem;color:rgba(255,255,255,0.7);}
+.header-right{display:flex;align-items:center;gap:0.75rem;}
+.user-greeting{color:white;font-size:0.8rem;font-weight:600;}
+.btn-share{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);padding:0.4rem 0.9rem;border-radius:50px;font-size:0.75rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;}
+.lang-select{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);padding:0.35rem 0.6rem;border-radius:8px;font-family:'Poppins',sans-serif;font-size:0.75rem;cursor:pointer;outline:none;}
+.lang-select option{background:#1a7a4a;}
+.streak-bar{background:linear-gradient(135deg,#0d4a2a,#1a7a4a);padding:0.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.streak-info{color:rgba(255,255,255,0.9);font-size:0.78rem;}
+.streak-num{font-weight:800;color:var(--gold);}
+.main{max-width:900px;margin:0 auto;padding:1.5rem;}
+.card{background:white;border-radius:20px;padding:1.75rem;margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+.card-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:1.25rem;}
+.disclaimer{background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.3);border-radius:12px;padding:0.85rem 1rem;margin-bottom:1.25rem;font-size:0.78rem;color:var(--gray);line-height:1.6;}
+.tabs{display:flex;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:wrap;}
+.tab-btn{background:white;border:2px solid rgba(27,122,74,0.2);color:var(--gray);padding:0.45rem 1rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.tab-btn.active,.tab-btn:hover{background:var(--green);color:white;border-color:var(--green);}
+.chat-box{background:var(--light);border-radius:16px;padding:1.25rem;max-height:420px;overflow-y:auto;margin-bottom:1rem;display:flex;flex-direction:column;gap:1rem;}
+.chat-msg{display:flex;gap:0.75rem;align-items:flex-start;}
+.chat-msg.user{flex-direction:row-reverse;}
+.chat-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.chat-msg.ai .chat-avatar{background:linear-gradient(135deg,var(--green),var(--light-green));}
+.chat-msg.user .chat-avatar{background:var(--navy);}
+.chat-bubble{max-width:80%;padding:0.8rem 1rem;border-radius:16px;font-size:0.85rem;line-height:1.7;}
+.chat-msg.ai .chat-bubble{background:white;color:var(--navy);box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.chat-msg.user .chat-bubble{background:var(--navy);color:white;}
+.chat-input-row{display:flex;gap:0.75rem;}
+.chat-input{flex:1;background:var(--light);border:1.5px solid rgba(27,42,107,0.12);color:var(--navy);padding:0.7rem 1rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.85rem;outline:none;}
+.btn-send{background:var(--green);color:white;border:none;padding:0.7rem 1.1rem;border-radius:50px;cursor:pointer;font-size:0.95rem;}
+.quick-prompts{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.75rem;}
+.quick-btn{background:white;border:1.5px solid rgba(27,122,74,0.2);color:var(--green);padding:0.35rem 0.8rem;border-radius:50px;font-size:0.72rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;}
+.mood-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:0.65rem;margin-bottom:1.25rem;}
+.mood-btn{background:var(--light);border:2px solid transparent;border-radius:12px;padding:0.85rem 0.4rem;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Poppins',sans-serif;}
+.mood-btn:hover,.mood-btn.selected{border-color:var(--light-green);background:#e8f8ef;}
+.mood-emoji{font-size:1.8rem;display:block;margin-bottom:0.3rem;}
+.mood-label{font-size:0.75rem;font-weight:600;color:var(--navy);}
+.breathing-container{text-align:center;padding:2rem 1rem;}
+.breath-circle{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--light-green));margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:white;transition:transform 4s ease-in-out;}
+.breath-text{font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
+.breath-sub{font-size:0.85rem;color:var(--gray);}
+.btn-breath{background:linear-gradient(135deg,var(--green),var(--light-green));color:white;border:none;padding:0.85rem 2rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:1rem;}
+.journal-entry{background:var(--light);border-radius:12px;padding:1rem;margin-bottom:0.75rem;border-left:3px solid var(--light-green);}
+.journal-date{font-size:0.72rem;color:var(--gray);margin-bottom:0.4rem;}
+.journal-text{font-size:0.85rem;color:var(--navy);line-height:1.6;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:0.35rem;}
+.form-group select,.form-group textarea,.form-group input{width:100%;background:var(--light);border:1.5px solid rgba(27,42,107,0.12);color:var(--navy);padding:0.7rem 0.9rem;border-radius:10px;font-family:'Poppins',sans-serif;font-size:0.85rem;outline:none;}
+.form-group textarea{resize:vertical;min-height:90px;}
+.btn-primary{background:linear-gradient(135deg,var(--green),var(--light-green));color:white;border:none;padding:0.85rem 1.5rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;width:100%;transition:all 0.2s;}
+.btn-primary:disabled{opacity:0.6;cursor:not-allowed;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;}
+.feature-card{background:white;border-radius:14px;padding:1.25rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.05);border-top:3px solid var(--light-green);}
+.feature-icon{font-size:1.8rem;margin-bottom:0.5rem;}
+.feature-title{font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem;}
+.feature-desc{font-size:0.72rem;color:var(--gray);line-height:1.5;margin-bottom:0.75rem;}
+.crisis-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0.75rem;}
+.crisis-card{background:white;border-radius:12px;padding:1rem;border-top:3px solid var(--red);box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.crisis-country{font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem;}
+.crisis-number{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--red);}
+.crisis-org{font-size:0.7rem;color:var(--gray);margin-top:0.15rem;}
+.crisis-call{display:inline-block;margin-top:0.5rem;background:var(--red);color:white;padding:0.3rem 0.75rem;border-radius:50px;font-size:0.7rem;font-weight:700;text-decoration:none;}
+.story-card{background:white;border-radius:16px;padding:1.5rem;margin-bottom:1rem;box-shadow:0 2px 12px rgba(0,0,0,0.05);border-left:4px solid var(--gold);}
+.story-meta{font-size:0.72rem;color:var(--gray);margin-bottom:0.75rem;}
+.story-text{font-size:0.88rem;color:var(--navy);line-height:1.8;font-style:italic;}
+.story-tag{display:inline-block;background:rgba(245,166,35,0.1);color:#b37800;padding:0.2rem 0.6rem;border-radius:50px;font-size:0.68rem;font-weight:700;margin-top:0.5rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;margin-right:0.5rem;vertical-align:middle;}
+footer{background:#0d4a2a;color:rgba(255,255,255,0.6);text-align:center;padding:1.25rem;font-size:0.78rem;margin-top:2rem;}
+footer a{color:var(--gold);text-decoration:none;}
+@media(max-width:600px){.landing-title{font-size:2rem;}.tabs{gap:0.35rem;}.tab-btn{padding:0.4rem 0.75rem;font-size:0.72rem;}}
+</style>
+</head>
+<body>
+  <script>
+var WORKER_URL = 'https://yan-ai-worker.youngafricansn.workers.dev';
+var userName = '';
+var userCountry = '';
+var userAge = '';
+var userLang = 'en';
+var selectedMood = '';
+var breathTimer = null;
+var breathStep = 0;
+var breathCycles = 0;
+var conversationHistory = [];
 
-<header class="header">
-  <div class="logo">
-    <div class="logo-icon">💚</div>
-    <div class="logo-text">
-      <h1>MentalAfrica</h1>
-      <p>AI Wellness Support for African Youth</p>
-    </div>
-  </div>
-  <div class="header-badge">🌍 Pan-African</div>
-</header>
+var T = {
+  en: {
+    greeting: 'Hello',
+    placeholder: 'Share how you are feeling...',
+    prompts: ['Overwhelmed','Lonely','Stressed','Anxious','Hopeless'],
+    messages: [
+      'I am feeling overwhelmed with school and studies',
+      'I am feeling lonely and isolated',
+      'I am stressed about money and family pressure',
+      'I want to talk about anxiety',
+      'I am feeling hopeless about my future in Africa'
+    ]
+  },
+  fr: {
+    greeting: 'Bonjour',
+    placeholder: 'Partagez ce que vous ressentez...',
+    prompts: ['Depasse','Seul','Stresse','Anxieux','Sans espoir'],
+    messages: [
+      'Je me sens depasse par les etudes',
+      'Je me sens seul et isole',
+      'Je suis stresse par largent et la famille',
+      'Je veux parler de mon anxiete',
+      'Je me sens sans espoir pour mon avenir'
+    ]
+  },
+  sw: {
+    greeting: 'Habari',
+    placeholder: 'Shiriki hisia zako...',
+    prompts: ['Nimezidiwa','Upweke','Msongo','Wasiwasi','Kutokuwa na matumaini'],
+    messages: [
+      'Ninajisikia nimezidiwa na masomo',
+      'Ninajisikia mpweke na kutengwa',
+      'Nina msongo wa pesa na familia',
+      'Nataka kuzungumza kuhusu wasiwasi',
+      'Ninajisikia kutokuwa na matumaini'
+    ]
+  }
+};
 
-<div class="hero">
-  <h2>You Are Not Alone.</h2>
-  <p>Free AI-powered mental health support for young Africans — available 24/7, culturally relevant, in your reality.</p>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="hero-stat-num">54</div><div class="hero-stat-label">African Countries</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">24/7</div><div class="hero-stat-label">Always Available</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">Free</div><div class="hero-stat-label">Forever</div></div>
-  </div>
-</div>
-
-<div class="main">
-  <div class="disclaimer">
-    ⚠️ <strong>Important:</strong> MentalAfrica is an AI support tool, not a replacement for professional mental health care. If you are in crisis, please call your local emergency number immediately.
-  </div>
-
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('chat')">💬 Talk to AI</button>
-    <button class="tab-btn" onclick="showTab('checkin')">🌡️ Mood Check-in</button>
-    <button class="tab-btn" onclick="showTab('resources')">📚 Resources</button>
-    <button class="tab-btn" onclick="showTab('crisis')">🆘 Crisis Help</button>
-  </div>
-
-  <div id="tab-chat">
-    <div class="card">
-      <div class="card-title">💬 Talk to MentalAfrica AI</div>
-      <div class="form-grid" style="margin-bottom:1.25rem;">
-        <div class="form-group">
-          <label>Your Country</label>
-          <select id="user-country">
-            <option value="">Select your country...</option>
-            <option>Kenya</option><option>Rwanda</option><option>Nigeria</option>
-            <option>Ghana</option><option>Tanzania</option><option>Uganda</option>
-            <option>South Africa</option><option>Cameroon</option><option>Ethiopia</option>
-            <option>Senegal</option><option>Zimbabwe</option><option>Other African Country</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Your Age Group</label>
-          <select id="user-age">
-            <option value="">Select age group...</option>
-            <option>15-18 (Secondary school)</option>
-            <option>19-24 (University student)</option>
-            <option>25-30 (Young professional)</option>
-            <option>31+ (Adult)</option>
-          </select>
-        </div>
-      </div>
-      <div class="chat-box" id="chat-box">
-        <div class="chat-msg ai">
-          <div class="chat-avatar">💚</div>
-          <div class="chat-bubble">
-            Hello! I am MentalAfrica, your AI wellness companion. I am here to listen and support you through whatever you are facing.<br><br>
-            I understand the unique pressures of being a young African — academic stress, family expectations, financial pressure and more.<br><br>
-            <strong>How are you feeling today?</strong>
-          </div>
-        </div>
-      </div>
-      <div class="quick-prompts">
-        <button class="quick-btn" onclick="quickPrompt('I am feeling overwhelmed with school and studies')">😰 Overwhelmed</button>
-        <button class="quick-btn" onclick="quickPrompt('I am feeling lonely and isolated')">😔 Lonely</button>
-        <button class="quick-btn" onclick="quickPrompt('I am stressed about money and family pressure')">😟 Stressed</button>
-        <button class="quick-btn" onclick="quickPrompt('I want to talk about anxiety')">😬 Anxious</button>
-        <button class="quick-btn" onclick="quickPrompt('I am feeling hopeless about my future in Africa')">😢 Hopeless</button>
-      </div>
-      <div class="chat-input-row">
-        <input type="text" class="chat-input" id="chat-input" placeholder="Share how you are feeling..." onkeydown="if(event.key==='Enter') sendMessage()">
-        <button class="btn-send" onclick="sendMessage()">➤</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="tab-checkin" style="display:none;">
-    <div class="card">
-      <div class="card-title">🌡️ Daily Mood Check-in</div>
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:1.5rem;">How are you feeling right now? Select your mood and get personalized support.</p>
-      <div class="mood-grid">
-        <div class="mood-btn" onclick="selectMood(this,'great')"><span class="mood-emoji">😊</span><div class="mood-label">Great</div><div class="mood-desc">Feeling positive</div></div>
-        <div class="mood-btn" onclick="selectMood(this,'good')"><span class="mood-emoji">🙂</span><div class="mood-label">Good</div><div class="mood-desc">Doing okay</div></div>
-        <div class="mood-btn" onclick="selectMood(this,'okay')"><span class="mood-emoji">😐</span><div class="mood-label">Okay</div><div class="mood-desc">Just getting by</div></div>
-        <div class="mood-btn" onclick="selectMood(this,'low')"><span class="mood-emoji">😔</span><div class="mood-label">Low</div><div class="mood-desc">Feeling down</div></div>
-        <div class="mood-btn" onclick="selectMood(this,'anxious')"><span class="mood-emoji">😰</span><div class="mood-label">Anxious</div><div class="mood-desc">Worried or stressed</div></div>
-        <div class="mood-btn" onclick="selectMood(this,'overwhelmed')"><span class="mood-emoji">😩</span><div class="mood-label">Overwhelmed</div><div class="mood-desc">Too much at once</div></div>
-        <div class="mood-btn" onclick="selectMood(this,'lonely')"><span class="mood-emoji">😢</span><div class="mood-label">Lonely</div><div class="mood-desc">Feeling isolated</div></div>
-        <div class="mood-btn" onclick="selectMood(this,'angry')"><span class="mood-emoji">😤</span><div class="mood-label">Frustrated</div><div class="mood-desc">Things not working</div></div>
-      </div>
-      <div class="form-group">
-        <label>What is on your mind? (optional)</label>
-        <textarea id="checkin-note" placeholder="Share more about how you are feeling..."></textarea>
-      </div>
-      <div class="form-group">
-        <label>Your Country</label>
-        <select id="checkin-country">
-          <option value="">Select country...</option>
-          <option>Kenya</option><option>Rwanda</option><option>Nigeria</option>
-          <option>Ghana</option><option>Tanzania</option><option>Uganda</option>
-          <option>South Africa</option><option>Cameroon</option><option>Other African Country</option>
-        </select>
-      </div>
-      <button class="btn-primary" id="checkin-btn" onclick="submitCheckin()">Get Personalized Support</button>
-      <div id="checkin-result" style="margin-top:1.5rem;"></div>
-    </div>
-  </div>
-
-  <div id="tab-resources" style="display:none;">
-    <div class="card">
-      <div class="card-title">📚 Mental Health Resources</div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🧘</div>
-          <div class="feature-title">Breathing Exercise</div>
-          <div class="feature-desc">4-7-8 technique to calm anxiety instantly</div>
-          <button class="quick-btn" style="margin-top:0.75rem;" onclick="getResource('Guide me through a 4-7-8 breathing exercise for anxiety. Make it step by step and calming.')">Try Now</button>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">😴</div>
-          <div class="feature-title">Sleep Better</div>
-          <div class="feature-desc">Tips for better sleep as an African student</div>
-          <button class="quick-btn" style="margin-top:0.75rem;" onclick="getResource('Give me practical tips for better sleep as a young African student dealing with stress.')">Learn More</button>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💪</div>
-          <div class="feature-title">Build Resilience</div>
-          <div class="feature-desc">African-rooted strategies for tough times</div>
-          <button class="quick-btn" style="margin-top:0.75rem;" onclick="getResource('Give me African-rooted strategies for building emotional resilience as a young person.')">Explore</button>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🗣️</div>
-          <div class="feature-title">Talk to Family</div>
-          <div class="feature-desc">How to discuss mental health in Africa</div>
-          <button class="quick-btn" style="margin-top:0.75rem;" onclick="getResource('How do I talk to my African family about mental health without being dismissed? Give practical scripts.')">Get Help</button>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📖</div>
-          <div class="feature-title">Journaling</div>
-          <div class="feature-desc">Writing prompts for mental clarity</div>
-          <button class="quick-btn" style="margin-top:0.75rem;" onclick="getResource('Give me 10 journaling prompts for young Africans dealing with pressure, identity and finding purpose.')">Start Writing</button>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🤝</div>
-          <div class="feature-title">Support a Friend</div>
-          <div class="feature-desc">Help without burning out</div>
-          <button class="quick-btn" style="margin-top:0.75rem;" onclick="getResource('How do I support a friend in Africa who is struggling mentally without hurting myself?')">Learn How</button>
-        </div>
-      </div>
-      <div id="resource-result" style="margin-top:1.5rem;"></div>
-    </div>
-  </div>
-
-  <div id="tab-crisis" style="display:none;">
-    <div class="card">
-      <div style="background:rgba(230,51,41,0.06);border:1px solid rgba(230,51,41,0.2);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
-        <p style="font-size:1rem;font-weight:700;color:var(--red);margin-bottom:0.5rem;">🆘 If you are in immediate danger</p>
-        <p style="font-size:0.85rem;color:var(--gray);line-height:1.7;">Call your local emergency number immediately. You are not alone. Help is available right now.</p>
-      </div>
-      <div class="crisis-grid">
-        <div class="crisis-card"><div class="crisis-country">🇰🇪 Kenya</div><div class="crisis-number">0800 720 965</div><div class="crisis-org">Befrienders Kenya</div><a href="tel:0800720965" class="crisis-call">Call Now</a></div>
-        <div class="crisis-card"><div class="crisis-country">🇷🇼 Rwanda</div><div class="crisis-number">912</div><div class="crisis-org">Rwanda Emergency</div><a href="tel:912" class="crisis-call">Call Now</a></div>
-        <div class="crisis-card"><div class="crisis-country">🇳🇬 Nigeria</div><div class="crisis-number">08096777690</div><div class="crisis-org">SURPIN Nigeria</div><a href="tel:08096777690" class="crisis-call">Call Now</a></div>
-        <div class="crisis-card"><div class="crisis-country">🇬🇭 Ghana</div><div class="crisis-number">0800-111-222</div><div class="crisis-org">Mental Health Authority</div><a href="tel:0800111222" class="crisis-call">Call Now</a></div>
-        <div class="crisis-card"><div class="crisis-country">🇿🇦 South Africa</div><div class="crisis-number">0800 567 567</div><div class="crisis-org">SADAG</div><a href="tel:0800567567" class="crisis-call">Call Now</a></div>
-        <div class="crisis-card"><div class="crisis-country">🇹🇿 Tanzania</div><div class="crisis-number">112</div><div class="crisis-org">Emergency Services</div><a href="tel:112" class="crisis-call">Call Now</a></div>
-        <div class="crisis-card"><div class="crisis-country">🇺🇬 Uganda</div><div class="crisis-number">0800 212 121</div><div class="crisis-org">Ministry of Health</div><a href="tel:0800212121" class="crisis-call">Call Now</a></div>
-        <div class="crisis-card"><div class="crisis-country">🇨🇲 Cameroon</div><div class="crisis-number">112</div><div class="crisis-org">Emergency Services</div><a href="tel:112" class="crisis-call">Call Now</a></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <p>MentalAfrica — Free AI Mental Health Support for African Youth</p>
-  <p style="margin-top:0.5rem;">Built with care for Africa 💚 | Not a substitute for professional help</p>
-</footer>
-
-<script>
-const WORKER_URL = 'https://yan-ai-worker.youngafricansn.workers.dev';
-let selectedMood = '';
-
-function showTab(tab) {
-  ['chat','checkin','resources','crisis'].forEach(function(t) {
-    document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
-  });
-  document.querySelectorAll('.tab-btn').forEach(function(b, i) {
-    b.classList.toggle('active', ['chat','checkin','resources','crisis'][i] === tab);
-  });
+function startApp() {
+  var name = document.getElementById('user-name-input').value.trim();
+  if (!name) { alert('Please enter your name'); return; }
+  userName = name;
+  userCountry = document.getElementById('user-country-input').value || 'Africa';
+  userAge = document.getElementById('user-age-input').value || 'young African';
+  userLang = document.getElementById('user-lang-input').value || 'en';
+  localStorage.setItem('ma_name', userName);
+  localStorage.setItem('ma_country', userCountry);
+  localStorage.setItem('ma_age', userAge);
+  localStorage.setItem('ma_lang', userLang);
+  document.getElementById('landing-page').style.display = 'none';
+  document.getElementById('main-app').style.display = 'block';
+  document.getElementById('lang-switcher').value = userLang;
+  initApp();
 }
 
-function selectMood(btn, mood) {
-  document.querySelectorAll('.mood-btn').forEach(function(b) { b.classList.remove('selected'); });
-  btn.classList.add('selected');
-  selectedMood = mood;
+function initApp() {
+  var t = T[userLang] || T.en;
+  document.getElementById('header-greeting').textContent = t.greeting + ', ' + userName + '!';
+  document.getElementById('chat-input').placeholder = t.placeholder;
+  var container = document.getElementById('quick-prompts-container');
+  container.innerHTML = '';
+  t.prompts.forEach(function(label, i) {
+    var btn = document.createElement('button');
+    btn.className = 'quick-btn';
+    btn.textContent = label;
+    var msg = t.messages[i];
+    btn.onclick = function() { quickPrompt(msg); };
+    container.appendChild(btn);
+  });
+  var chatBox = document.getElementById('chat-box');
+  chatBox.innerHTML = '';
+  var welcome = userLang === 'fr'
+    ? 'Bonjour ' + userName + '! Je suis MentalAfrica. Comment vous sentez-vous aujourd hui?'
+    : userLang === 'sw'
+    ? 'Habari ' + userName + '! Mimi ni MentalAfrica. Unajisikiaje leo?'
+    : 'Hello ' + userName + '! I am MentalAfrica, your AI wellness companion. I understand the pressures of being a young African. How are you feeling today?';
+  addMessage(welcome, 'ai');
+  loadStreak();
+  loadJournalEntries();
+}
+
+function switchLanguage(lang) {
+  userLang = lang;
+  localStorage.setItem('ma_lang', lang);
+  initApp();
+}
+
+function showTab(tab) {
+  var tabs = ['chat','checkin','journal','breathe','resources','stories','crisis'];
+  tabs.forEach(function(t) {
+    var el = document.getElementById('tab-' + t);
+    if (el) el.style.display = t === tab ? 'block' : 'none';
+    var btn = document.getElementById('tab-' + t + '-btn');
+    if (btn) btn.classList.toggle('active', t === tab);
+  });
 }
 
 function quickPrompt(text) {
@@ -293,26 +322,33 @@ async function sendMessage() {
   var msg = input.value.trim();
   if (!msg) return;
   input.value = '';
-  var country = document.getElementById('user-country').value || 'Africa';
-  var age = document.getElementById('user-age').value || 'young African';
   addMessage(msg, 'user');
+  conversationHistory.push({role: 'user', content: msg});
   var typingId = 'typing-' + Date.now();
   addTyping(typingId);
   try {
-    var prompt = 'You are MentalAfrica, a compassionate AI mental health companion for young Africans. User is from ' + country + ', age group: ' + age + '. Be warm, empathetic and culturally relevant to Africa. Acknowledge African cultural context like family pressure, community expectations, academic stress and financial hardship. Validate feelings first before offering advice. If someone expresses suicidal thoughts immediately urge them to call for help. Keep responses conversational. User says: ' + msg;
+    var langInstr = userLang === 'fr' ? 'Respond in French.' : userLang === 'sw' ? 'Respond in Swahili.' : 'Respond in English.';
+    var history = conversationHistory.slice(-6).map(function(m) { return m.role + ': ' + m.content; }).join('\n');
+    var prompt = 'You are MentalAfrica, a compassionate AI mental health companion for young Africans. '
+      + 'User: ' + userName + ', Country: ' + userCountry + ', Age: ' + userAge + '. ' + langInstr + '\n'
+      + 'Conversation so far:\n' + history + '\n\n'
+      + 'Be warm, empathetic and culturally relevant to Africa. Validate feelings first. '
+      + 'Use their name occasionally. If crisis — immediately provide resources.\n'
+      + 'Latest message: ' + msg;
     var response = await fetch(WORKER_URL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({contents: [{role: 'user', parts: [{text: prompt}]}]})
     });
     var data = await response.json();
-    var reply = 'I am here for you. Could you tell me more about how you are feeling?';
+    var reply = 'I am here for you, ' + userName + '.';
     try { reply = data.candidates[0].content.parts[0].text; } catch(e) {}
     removeTyping(typingId);
     addMessage(reply, 'ai');
+    conversationHistory.push({role: 'assistant', content: reply});
   } catch(e) {
     removeTyping(typingId);
-    addMessage('I am having trouble connecting. Please try again — I am here for you.', 'ai');
+    addMessage('I am having trouble connecting. Please try again.', 'ai');
   }
 }
 
@@ -341,15 +377,26 @@ function removeTyping(id) {
   if (el) el.remove();
 }
 
+function selectMood(btn, mood) {
+  document.querySelectorAll('.mood-btn').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  selectedMood = mood;
+}
+
 async function submitCheckin() {
-  if (!selectedMood) { alert('Please select your mood first'); return; }
+  if (!selectedMood) { alert('Please select your mood'); return; }
   var note = document.getElementById('checkin-note').value.trim();
-  var country = document.getElementById('checkin-country').value || 'Africa';
   var btn = document.getElementById('checkin-btn');
   var result = document.getElementById('checkin-result');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Getting your support...';
-  var prompt = 'You are MentalAfrica. A young person from ' + country + ' is feeling: ' + selectedMood + '. ' + (note ? 'They added: ' + note : '') + '. Provide: 1) A warm empathetic acknowledgment (2-3 sentences) 2) 3 specific practical coping strategies relevant to their mood and African context 3) One encouraging African proverb that fits 4) A gentle reminder about professional help. Keep it warm and culturally relevant to Africa.';
+  btn.innerHTML = '<span class="spinner"></span> Getting support...';
+  updateStreak();
+  var langInstr = userLang === 'fr' ? 'Respond in French.' : userLang === 'sw' ? 'Respond in Swahili.' : '';
+  var prompt = 'You are MentalAfrica. ' + userName + ' from ' + userCountry + ' feels: ' + selectedMood + '. '
+    + (note ? 'They added: ' + note + '. ' : '') + langInstr + ' '
+    + 'Give: 1) Warm acknowledgment using name (2-3 sentences) '
+    + '2) 3 practical coping strategies for African context '
+    + '3) One African proverb 4) Gentle reminder about professional help.';
   try {
     var response = await fetch(WORKER_URL, {
       method: 'POST',
@@ -357,20 +404,56 @@ async function submitCheckin() {
       body: JSON.stringify({contents: [{role: 'user', parts: [{text: prompt}]}]})
     });
     var data = await response.json();
-    var reply = 'Thank you for sharing. You are brave for checking in today.';
+    var reply = 'Thank you for sharing, ' + userName + '.';
     try { reply = data.candidates[0].content.parts[0].text; } catch(e) {}
-    result.innerHTML = '<div style="background:var(--light);border-radius:16px;padding:1.5rem;border-left:4px solid var(--light-green);margin-top:1rem;">'
-      + '<p style="font-size:0.88rem;color:var(--navy);line-height:1.8;">' + reply.split('\n').join('<br>') + '</p></div>';
+    result.innerHTML = '<div style="background:var(--light);border-radius:14px;padding:1.25rem;border-left:4px solid var(--light-green);margin-top:1rem;">'
+      + '<p style="font-size:0.85rem;color:var(--navy);line-height:1.8;">' + reply.split('\n').join('<br>') + '</p></div>';
   } catch(e) {
     result.innerHTML = '<p style="color:var(--gray);">Connection error. Please try again.</p>';
   }
   btn.disabled = false;
-  btn.innerHTML = 'Get Personalized Support';
+  btn.textContent = 'Get Support';
 }
 
-async function getResource(prompt) {
-  var result = document.getElementById('resource-result');
-  result.innerHTML = '<p style="color:var(--gray);font-size:0.85rem;">Loading...</p>';
+function updateStreak() {
+  var today = new Date().toISOString().split('T')[0];
+  var lastDate = localStorage.getItem('ma_last_checkin');
+  var streak = parseInt(localStorage.getItem('ma_streak') || '0');
+  if (lastDate === today) return;
+  var yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  if (lastDate === yesterday.toISOString().split('T')[0]) {
+    streak = streak + 1;
+  } else {
+    streak = 1;
+  }
+  localStorage.setItem('ma_streak', streak);
+  localStorage.setItem('ma_last_checkin', today);
+  loadStreak();
+}
+
+function loadStreak() {
+  var streak = localStorage.getItem('ma_streak') || '0';
+  var lastDate = localStorage.getItem('ma_last_checkin') || '';
+  document.getElementById('streak-count').textContent = streak;
+  document.getElementById('last-checkin-text').textContent = lastDate ? 'Last: ' + lastDate : '';
+}
+
+async function saveJournalEntry() {
+  var text = document.getElementById('journal-input').value.trim();
+  if (!text) { alert('Write something first'); return; }
+  var btn = document.getElementById('journal-btn');
+  var aiDiv = document.getElementById('journal-ai-response');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Getting reflection...';
+  var entry = {text: text, date: new Date().toLocaleDateString('en-GB'), timestamp: Date.now()};
+  var entries = JSON.parse(localStorage.getItem('ma_journal') || '[]');
+  entries.unshift(entry);
+  if (entries.length > 20) entries = entries.slice(0, 20);
+  localStorage.setItem('ma_journal', JSON.stringify(entries));
+  var langInstr = userLang === 'fr' ? 'Respond in French.' : userLang === 'sw' ? 'Respond in Swahili.' : '';
+  var prompt = 'You are MentalAfrica. ' + userName + ' from ' + userCountry + ' wrote: "' + text + '". '
+    + langInstr + ' Give a brief warm reflection (3-4 sentences): validate feelings, one insight, encouragement.';
   try {
     var response = await fetch(WORKER_URL, {
       method: 'POST',
@@ -378,15 +461,145 @@ async function getResource(prompt) {
       body: JSON.stringify({contents: [{role: 'user', parts: [{text: prompt}]}]})
     });
     var data = await response.json();
+    var reflection = 'Thank you for writing, ' + userName + '.';
+    try { reflection = data.candidates[0].content.parts[0].text; } catch(e) {}
+    aiDiv.innerHTML = '<div style="background:rgba(27,122,74,0.06);border-radius:12px;padding:1rem;border-left:3px solid var(--light-green);margin-bottom:1rem;">'
+      + '<p style="font-size:0.78rem;font-weight:700;color:var(--green);margin-bottom:0.35rem;">AI Reflection</p>'
+      + '<p style="font-size:0.85rem;color:var(--navy);line-height:1.7;">' + reflection.split('\n').join('<br>') + '</p></div>';
+  } catch(e) { aiDiv.innerHTML = ''; }
+  document.getElementById('journal-input').value = '';
+  btn.disabled = false;
+  btn.textContent = 'Save and Get AI Reflection';
+  loadJournalEntries();
+}
+
+function loadJournalEntries() {
+  var container = document.getElementById('journal-entries-container');
+  if (!container) return;
+  var entries = JSON.parse(localStorage.getItem('ma_journal') || '[]');
+  if (entries.length === 0) { container.innerHTML = ''; return; }
+  var html = '<p style="font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;">Previous Entries (' + entries.length + ')</p>';
+  entries.forEach(function(e) {
+    html += '<div class="journal-entry"><div class="journal-date">' + e.date + '</div>'
+      + '<div class="journal-text">' + e.text.substring(0, 150) + (e.text.length > 150 ? '...' : '') + '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+function startBreathing() {
+  if (breathTimer) {
+    clearTimeout(breathTimer);
+    breathTimer = null;
+    document.getElementById('breath-btn').textContent = 'Start Breathing Exercise';
+    document.getElementById('breath-circle').textContent = 'Ready';
+    document.getElementById('breath-text').textContent = 'Press Start to begin';
+    document.getElementById('breath-circle').style.transform = 'scale(1)';
+    breathCycles = 0;
+    breathStep = 0;
+    return;
+  }
+  breathCycles = 0;
+  breathStep = 0;
+  document.getElementById('breath-btn').textContent = 'Stop';
+  runBreathStep();
+}
+
+function runBreathStep() {
+  var circle = document.getElementById('breath-circle');
+  var text = document.getElementById('breath-text');
+  var sub = document.getElementById('breath-sub');
+  var steps = [
+    {label:'Breathe IN', text:'Inhale slowly through your nose', duration:4000, scale:'scale(1.5)'},
+    {label:'Hold', text:'Hold your breath gently', duration:7000, scale:'scale(1.5)'},
+    {label:'Breathe OUT', text:'Exhale slowly through your mouth', duration:8000, scale:'scale(1)'}
+  ];
+  if (breathStep >= steps.length) {
+    breathStep = 0;
+    breathCycles++;
+    if (breathCycles >= 4) {
+      circle.textContent = 'Done!';
+      text.textContent = 'Great job, ' + userName + '! You completed 4 cycles.';
+      sub.textContent = 'You should feel calmer now.';
+      document.getElementById('breath-btn').textContent = 'Start Again';
+      breathTimer = null;
+      breathCycles = 0;
+      breathStep = 0;
+      return;
+    }
+  }
+  var step = steps[breathStep];
+  circle.textContent = step.label;
+  text.textContent = step.text;
+  sub.textContent = 'Cycle ' + (breathCycles + 1) + ' of 4';
+  circle.style.transition = 'transform ' + (step.duration/1000) + 's ease-in-out';
+  circle.style.transform = step.scale;
+  breathStep++;
+  breathTimer = setTimeout(runBreathStep, step.duration);
+}
+
+async function getResource(prompt) {
+  var result = document.getElementById('resource-result');
+  result.innerHTML = '<p style="color:var(--gray);font-size:0.82rem;">Loading...</p>';
+  var langInstr = userLang === 'fr' ? 'Respond in French.' : userLang === 'sw' ? 'Respond in Swahili.' : '';
+  try {
+    var response = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({contents: [{role: 'user', parts: [{text: prompt + ' ' + langInstr}]}]})
+    });
+    var data = await response.json();
     var reply = 'Please try again.';
     try { reply = data.candidates[0].content.parts[0].text; } catch(e) {}
-    result.innerHTML = '<div style="background:var(--light);border-radius:16px;padding:1.5rem;border-left:4px solid var(--green);margin-top:1rem;">'
-      + '<p style="font-size:0.88rem;color:var(--navy);line-height:1.8;">' + reply.split('\n').join('<br>') + '</p></div>';
-    result.scrollIntoView({behavior: 'smooth'});
+    result.innerHTML = '<div style="background:var(--light);border-radius:14px;padding:1.25rem;border-left:4px solid var(--green);margin-top:1rem;">'
+      + '<p style="font-size:0.85rem;color:var(--navy);line-height:1.8;">' + reply.split('\n').join('<br>') + '</p></div>';
+    result.scrollIntoView({behavior:'smooth'});
   } catch(e) {
     result.innerHTML = '<p style="color:var(--gray);">Connection error. Please try again.</p>';
   }
 }
+
+function shareStory() {
+  var text = document.getElementById('story-input').value.trim();
+  var country = document.getElementById('story-country').value || 'Africa';
+  var tag = document.getElementById('story-tag-select').value;
+  if (!text) { alert('Please write your story first'); return; }
+  var list = document.getElementById('stories-list');
+  var div = document.createElement('div');
+  div.className = 'story-card';
+  div.style.borderLeftColor = 'var(--light-green)';
+  div.innerHTML = '<div class="story-meta">' + country + ' - Just now</div>'
+    + '<div class="story-text">"' + text + '"</div>'
+    + '<div class="story-tag">' + tag + '</div>';
+  list.insertBefore(div, list.firstChild);
+  document.getElementById('story-input').value = '';
+  alert('Thank you for sharing. Your story will help others feel less alone.');
+}
+
+function shareApp() {
+  var url = 'https://rayiecho.github.io/mentalafrica';
+  var text = 'Free AI mental health support for African youth: ' + url;
+  if (navigator.share) {
+    navigator.share({title: 'MentalAfrica', text: text, url: url});
+  } else {
+    navigator.clipboard.writeText(url).then(function() {
+      alert('Link copied! Share it with someone who needs it.');
+    });
+  }
+}
+
+window.addEventListener('load', function() {
+  var savedName = localStorage.getItem('ma_name');
+  if (savedName) {
+    userName = savedName;
+    userCountry = localStorage.getItem('ma_country') || 'Africa';
+    userAge = localStorage.getItem('ma_age') || 'young African';
+    userLang = localStorage.getItem('ma_lang') || 'en';
+    document.getElementById('landing-page').style.display = 'none';
+    document.getElementById('main-app').style.display = 'block';
+    document.getElementById('lang-switcher').value = userLang;
+    initApp();
+  }
+});
 </script>
 </body>
 </html>
